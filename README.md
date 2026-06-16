@@ -1,6 +1,6 @@
 # AIML Tech Stack & Project Portfolio
 
-Welcome to my comprehensive Artificial Intelligence and Machine Learning (AIML) repository. This project serves as a centralized hub showcasing my expertise across the entire spectrum of modern AI—ranging from classical machine learning algorithms to cutting-edge Generative AI, Multi-Agent Orchestration, and production-ready API deployment.
+Welcome to my comprehensive Artificial Intelligence and Machine Learning (AIML) repository. This project serves as a centralized hub showcasing my expertise across the entire spectrum of modern AI ranging from classical machine learning algorithms to cutting-edge Generative AI, Multi-Agent Orchestration, and production-ready API deployment.
 
 ---
 
