@@ -8,7 +8,6 @@
 
 -  A curated collection of the most valuable open-source repositories for aspiring AI/ML Engineers, Data Scientists, and Generative AI Developers.
 
-![GitHub](https://img.shields.io/badge/Open%20Source-GitHub-black?logo=github)
 ![AI](https://img.shields.io/badge/Artificial%20Intelligence-AI-blue)
 ![ML](https://img.shields.io/badge/Machine%20Learning-ML-green)
 ![LLM](https://img.shields.io/badge/Generative%20AI-LLMs-orange)
