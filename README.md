@@ -1,4 +1,4 @@
-## 🚀 AI/ML Learning Vault
+# 🚀 AI/ML Learning Vault
 
 <div align="center">
   
@@ -6,7 +6,7 @@
 
 - Your Complete Roadmap to Machine Learning, Deep Learning, LLMs, RAG, NLP & Agentic AI
 
-⭐ A curated collection of the most valuable open-source repositories for aspiring AI/ML Engineers, Data Scientists, and Generative AI Developers.
+-  A curated collection of the most valuable open-source repositories for aspiring AI/ML Engineers, Data Scientists, and Generative AI Developers.
 
 ![GitHub](https://img.shields.io/badge/Open%20Source-GitHub-black?logo=github)
 ![AI](https://img.shields.io/badge/Artificial%20Intelligence-AI-blue)
@@ -194,9 +194,9 @@ Production AI Applications
 
 - **AI/ML Engineer | Python Developer | Generative AI & Agentic AI Enthusiast**
 
-🚀 Building AI Applications  
-📚 Learning in Public  
-🤝 Sharing Knowledge with the Community  
+- 🚀 Building AI Applications  
+- 📚 Learning in Public  
+- 🤝 Sharing Knowledge with the Community  
 
 ---
 
@@ -213,7 +213,7 @@ If you found this repository useful:
 
 <div align="center">
 
-### 🚀 Learn • Build • Share • Grow
+#### 🚀 Learn • Build • Share • Grow
 
 **Happy Learning & Happy Building!**
 
