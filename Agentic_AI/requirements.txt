@@ -1,14 +1,33 @@
-ipykernel 
-langgraph 
-langchain
-langchain-community
-langchain-core
-graphviz
-groq
-langchain-groq
-pydantic
-pydantic[email]
-requests
-tavily-python
-langchain==0.1.20
-streamlit
+# Core
+ipykernel==6.29.5
+streamlit==1.36.0
+python-dotenv==1.0.1
+requests==2.32.3
+
+# LangChain Ecosystem
+langchain==0.2.10
+langchain-core==0.2.23
+langchain-community==0.2.10
+langchain-openai==0.1.17
+langchain-groq==0.1.6
+langgraph==0.1.19
+langserve==0.2.2
+langchain-chroma==0.1.2
+
+# LLM Providers
+groq==0.9.0
+tavily-python==0.4.0
+
+# Data Validation
+pydantic==2.8.2
+pydantic[email]==2.8.2
+
+# Document Processing
+beautifulsoup4==4.12.3
+bs4==0.0.2
+unstructured==0.15.0
+pypdf==4.3.1
+wikipedia==1.4.0
+
+# Visualization
+graphviz==0.20.3
