@@ -19,6 +19,7 @@ langchain-openai
 langchain-groq
 langchain-google-genai
 langchain-anthropic
+langchainhub
 
 
 # Vector Stores
