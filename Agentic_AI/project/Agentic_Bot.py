@@ -1,42 +1,64 @@
-from langgraph.graph import StateGraph,START,END
-from typing import TypedDict,Annotated
-from langchain_core.messages import BaseMessage,HumanMessage
+import sqlite3
+from langgraph.graph import StateGraph, START, END
+from typing import TypedDict, Annotated
+from langchain_core.messages import BaseMessage, HumanMessage
 from langchain_groq import ChatGroq
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph.message import add_messages
 
 from dotenv import load_dotenv
 load_dotenv()
 
-# Groq LLM 
+# Groq LLM
 llm = ChatGroq(
     model="openai/gpt-oss-120b",
     temperature=0.3,
     streaming=True
 )
 
-# Define State 
-class ChatState(TypedDict):
-    messages: Annotated[list[BaseMessage],add_messages]
 
-# Define Node 
-def chat_node(state:ChatState):
+# Define State
+class ChatState(TypedDict):
+    messages: Annotated[list[BaseMessage], add_messages]
+
+
+# Define Node
+def chat_node(state: ChatState):
     messages = state['messages']
     # send to llm
     response = llm.invoke(messages)
     # response store state
     return {'messages': [response]}
 
-checkpoint = MemorySaver()
 
-# Build Our Graph 
+# Database Connection
+conn = sqlite3.connect(database="chatbot_data.db", check_same_thread=False)
+checkpoint = SqliteSaver(conn)
+
+conn.execute("""
+CREATE TABLE IF NOT EXISTS threads(
+    thread_id TEXT PRIMARY KEY,
+    title TEXT
+)
+""")
+conn.commit()
+
+# Build Our Graph
 graph = StateGraph(ChatState)
 
-# Add Node 
-graph.add_node('chat_node',chat_node)
+# Add Node
+graph.add_node('chat_node', chat_node)
 
-# Add Edges 
-graph.add_edge(START,'chat_node')
-graph.add_edge('chat_node',END)
+# Add Edges
+graph.add_edge(START, 'chat_node')
+graph.add_edge('chat_node', END)
 
 chatbot = graph.compile(checkpointer=checkpoint)
+
+
+def get_all_threads():
+    all_threads = set()
+    for ckpt in checkpoint.list(None):
+        all_threads.add(ckpt.config['configurable']['thread_id'])
+
+    return list(all_threads)
