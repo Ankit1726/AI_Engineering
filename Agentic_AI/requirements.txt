@@ -15,6 +15,7 @@ langgraph==0.2.56
 langsmith
 langgraph-checkpoint-sqlite
 langserve
+langchain-tavily
 
 # LLM Providers
 langchain-openai
