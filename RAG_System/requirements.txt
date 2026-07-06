@@ -1,0 +1,81 @@
+# Core
+python-dotenv
+pydantic>=2.8
+typing-extensions
+
+# LangChain
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+
+# LangGraph
+langgraph
+langgraph-checkpoint
+langgraph-checkpoint-sqlite
+
+# LLM Providers
+langchain-openai
+langchain-google-genai
+langchain-groq
+
+# Embedding Models
+sentence-transformers
+transformers
+torch
+
+# Vector Databases
+faiss-cpu
+chromadb
+
+# Optional Vector DBs
+pinecone
+qdrant-client
+weaviate-client
+
+# Document Loaders
+pypdf
+pymupdf
+unstructured
+python-docx
+beautifulsoup4
+lxml
+wikipedia
+arxiv
+
+# Search Tools
+tavily-python
+duckduckgo-search
+
+# Tokenization
+tiktoken
+
+# Database
+sqlalchemy
+
+# API
+fastapi
+uvicorn
+
+# UI
+streamlit
+
+# Data
+pandas
+numpy
+
+# Utility
+requests
+httpx
+aiohttp
+tenacity
+
+# Notebook
+ipykernel
+jupyter
+
+# Logging
+rich
+
+# Environment
+python-multipart
