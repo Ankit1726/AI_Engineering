@@ -54,34 +54,3 @@ def delete_todo(todo_id:int):
                }
      return {"error","Data Not Found"}
 
-## [Path,Parameter,Query]
-users = []
-
-class User(BaseModel):
-     name:str 
-     age:int  
-
-# Create Route 
-@app.post("/users")
-def create_user(user:User):
-     users.append(user)
-     return {
-          "message":"User Created Sucess..",
-          "data":user
-     }
-
-# Update Route [mapping with (Path,Query,Body)]
-@app.put("/users/{user_id}")
-def update_user(
-     user_id:int,  # Path
-     user:User,    # Request
-     notify:bool = False  # Body
-):
-     if user_id < len(users):
-          users[user_id] = user 
-          return{
-            "message": "User updated", 
-            "notify_status": notify, 
-            "data": user
-          }
-     return {"error":"user not found"}
