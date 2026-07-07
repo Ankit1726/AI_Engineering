@@ -32,6 +32,7 @@ faiss-cpu
 
 
 # Embeddings
+langchain-huggingface
 sentence-transformers
 
 # Search & Tools
