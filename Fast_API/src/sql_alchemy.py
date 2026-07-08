@@ -1,4 +1,4 @@
-## Integration of SQL Alchemy 
+## Integration of SQL Alchemy Wirth CRUD Operations
 import sqlite3
 from fastapi import FastAPI,Depends,HTTPException,status
 from sqlalchemy import create_engine,Column,Integer,String
