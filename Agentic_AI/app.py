@@ -2,7 +2,6 @@ from src.backend import chatbot, get_all_threads
 
 try:
     from src.backend import ingest_rag_document
-
     RAG_INGESTION_AVAILABLE = True
 except ImportError:
     RAG_INGESTION_AVAILABLE = False
@@ -23,7 +22,7 @@ import os
 
 # Page COnfig
 st.set_page_config(
-    page_title="Nova · Agentic Chatbot",
+    page_title="Nova Agentic Chatbot",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -245,8 +244,8 @@ def make_title_from_text(text, max_words=6, max_chars=34):
 
 def get_thread_title(thread_id):
     """
-    Returns a human-readable topic for a thread instead of its raw UUID.
-    Cached in session_state so we don't re-hit the checkpointer every rerun.
+    - Returns a human-readable topic for a thread instead of its raw UUID.
+    - Cached in session_state so we don't re-hit the checkpointer every rerun.
     """
     titles = st.session_state.setdefault("thread_titles", {})
 
@@ -407,7 +406,7 @@ st.markdown(
     <div class="logo">🤖</div>
     <div>
         <p class="title">Nova Agent</p>
-        <p class="subtitle">LangGraph · Tool-using assistant with RAG, search & human approval</p>
+        <p class="subtitle">LangGraph Tool using assistant with RAG & human approval</p>
     </div>
     <div class="status-pill"><span class="dot"></span> Online</div>
 </div>
@@ -418,7 +417,7 @@ st.markdown(
 
 # Sidebar 
 with st.sidebar:
-    st.markdown("### 💬 Nova Personalised Bot 🧠")
+    st.markdown("### 💬 Nova Personalised ChatBot")
 
     if st.button("➕  New chat", use_container_width=True):
         reset_chat()
@@ -460,15 +459,43 @@ with st.sidebar:
             st.session_state["message_history"] = temp_messages
             sync_pending_interrupt(thread_id)
             st.rerun()
-
+            
     st.markdown("---")
-    st.caption(f"🕒 {datetime.now().strftime('%b %d, %Y · %H:%M')}")
-    if not RAG_INGESTION_AVAILABLE:
-        st.caption("⚠️ PDF not uploaded..!")
-    st.caption("Built with LangGraph & Streamlit ✨")
-    st.caption("Made By ANKIT GUPTA")
+    st.markdown(
+    f"""
+            <div style="
+            background:linear-gradient(135deg,#1e293b,#0f172a);
+            padding:14px;
+            border-radius:14px;
+            border:1px solid rgba(255,255,255,.08);
+            margin-top:10px;
+            box-shadow:0 4px 12px rgba(0,0,0,.25);
+            ">
+           
+           <p style="color: {"#22C55E" if RAG_INGESTION_AVAILABLE else "#F59E0B"};
+           font-weight:600;
+           font-size:13px;">
+            {
+                "🟢 Document Indexed"
+                if RAG_INGESTION_AVAILABLE
+                else "🟠 Upload PDF"
+            }
+            </p>
 
-
+            <p style="margin:8px 0 0 0;color:#94a3b8;font-size:12px;">
+            🕒 {datetime.now().strftime("%I:%M %p")} 
+                </br> 
+            🗓️ {datetime.now().strftime("%d %b %Y")} 
+            </p>
+            <hr style="border:0;border-top:1px solid rgba(255,255,255,.08);margin:10px 0;">
+            <p style="margin:0;text-align:center;font-size:13px;color:white;">
+            ❤️ Made by <span style="color:#38bdf8;font-weight:700;">Ankit Gupta 👦</span>
+            </p>
+            </div>
+            """,
+    unsafe_allow_html=True,
+)
+    
 # Main Chat Area 
 if not st.session_state["message_history"]:
     st.markdown(
@@ -480,7 +507,7 @@ if not st.session_state["message_history"]:
     </div>
     """,
         unsafe_allow_html=True,
-    )
+)
 
 for message in st.session_state["message_history"]:
     avatar = "🧑" if message["role"] == "user" else "🤖"

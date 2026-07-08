@@ -1,4 +1,4 @@
-from langgraph.graph import StateGraph, START, END
+from langgraph.graph import StateGraph, START
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph.message import add_messages
@@ -17,120 +17,34 @@ import sqlite3
 import os
 
 from src.tool import calculator, get_current_weather, get_stock_price
+from src.rag import rag_tool
 from dotenv import load_dotenv
-
 load_dotenv()
 
 
 # LLM
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.7)
-
-LLM = ChatGroq(model="openai/gpt-oss-120b", temperature=0)
-
-# Embedding Model
-embeddings = GoogleGenerativeAIEmbeddings(model="gemini-embedding-001")
-
-# Shared path for the FAISS vector store used by both retrieval and ingestion
-FAISS_DB_PATH = "faiss_db"
-
-
-# Retriver
-def get_retriever():
-    vector_store = FAISS.load_local(
-        folder_path=FAISS_DB_PATH,
-        embeddings=embeddings,
-        allow_dangerous_deserialization=True,
-    )
-
-    retriever = vector_store.as_retriever(
-        search_type="similarity", search_kwargs={"k": 3}
-    )
-    return retriever
-
-
-# RAG Tool
-@tool
-def rag_tool(query: str) -> str:
-    """
-    - Retrieve relevant information from the PDF document.
-
-    - Use this tool when the user asks factual or conceptual questions
-    - that may be answered using the stored PDF documents.
-
-    - Args:
-        query: The question or search query used to retrieve PDF content.
-    """
-    try:
-        retriever = get_retriever()
-    except Exception:
-        return (
-            "No PDF has been uploaded and indexed yet. "
-            "Ask the user to upload a PDF before answering document questions."
-        )
-
-    documents = retriever.invoke(query)
-
-    if not documents:
-        return "no related information found in provided resource..!"
-
-    formatted_docs = []
-
-    for index, document in enumerate(documents, start=1):
-        source = document.metadata.get("source", "unknown source")
-        page = document.metadata.get("page", "unknown page")
-
-        formatted_docs.append(
-            f"Document {index}\n"
-            f"Source: {source}\n"
-            f"Page: {page}\n"
-            f"Content: {document.page_content}"
-        )
-
-    return "\n\n".join(formatted_docs)
-
-
-# PDF Ingestion (RAG Upload)
-def ingest_rag_document(pdf_path: str) -> int:
-    """
-    Ingest a PDF into the FAISS vector store so `rag_tool` can retrieve it.
-
-    Args:
-        pdf_path: Local filesystem path to the PDF file to ingest.
-
-    Returns:
-        The number of chunks that were embedded and stored.
-    """
-    loader = PyPDFLoader(pdf_path)
-    documents = loader.load()
-
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=70,
-    )
-    chunks = splitter.split_documents(documents)
-    if not chunks:
-        return 0
-
-    if os.path.exists(FAISS_DB_PATH):
-        vector_store = FAISS.load_local(
-            folder_path=FAISS_DB_PATH,
-            embeddings=embeddings,
-            allow_dangerous_deserialization=True,
-        )
-        vector_store.add_documents(chunks)
-    else:
-        vector_store = FAISS.from_documents(chunks, embeddings)
-
-    vector_store.save_local(FAISS_DB_PATH)
-    return len(chunks)
-
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    temperature=0.3
+)
+LLM = ChatGroq(
+    model="openai/gpt-oss-120b", 
+    temperature=0
+)
 
 # Search Tool
-search_tool = TavilySearch(max_results=5, topic="general", search_depth="advanced")
+search_tool = TavilySearch(
+    max_results=5, 
+    topic="general", 
+    search_depth="advanced"
+)
 
-tools = [search_tool, calculator, get_current_weather, get_stock_price]
+tools = [search_tool,rag_tool, calculator, get_current_weather, get_stock_price]
 
-LLM_Tools = LLM.bind_tools(tools)
+
+primary_llm = LLM.bind_tools(tools)
+backup_llm = llm.bind_tools(tools)
+agent_llm = primary_llm.with_fallbacks([backup_llm])
 
 
 # Define State
@@ -162,9 +76,8 @@ def chat_node(state: ChatState):
         )
     )
     messages = [system_message, *state["messages"]]
-    response = LLM_Tools.invoke(messages)
+    response = agent_llm.invoke(messages)
     return {"messages": [response]}
-
 
 tool_node = ToolNode(tools)
 
