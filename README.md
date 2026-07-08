@@ -215,5 +215,6 @@ If you found this repository useful:
 #### 🚀 Learn • Build • Share • Grow
 
 **Happy Learning & Happy Building!**
+**Free LLM API:https://github.com/alistaitsacle/free-llm-api-keys**
 
 </div>
