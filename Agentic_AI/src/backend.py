@@ -14,7 +14,6 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from typing import TypedDict, Annotated
 import sqlite3
-import os
 
 from src.tool import calculator, get_current_weather, get_stock_price
 from src.rag import rag_tool

@@ -24,16 +24,17 @@ langchain-google-genai
 langchain-anthropic
 langchainhub
 
-
 # Vector Stores
 langchain-chroma
 chromadb
 faiss-cpu
+pinecone-client
 
 
 # Embeddings
 langchain-huggingface
 sentence-transformers
+google-ai-generativelanguage
 
 # Search & Tools
 tavily-python

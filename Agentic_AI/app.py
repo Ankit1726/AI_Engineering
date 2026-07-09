@@ -1,14 +1,13 @@
 from src.backend import chatbot, get_all_threads
 
 try:
-    from src.backend import ingest_rag_document
+    from src.rag import ingest_rag_document,rag_tool
     RAG_INGESTION_AVAILABLE = True
 except ImportError:
     RAG_INGESTION_AVAILABLE = False
+
     def ingest_rag_document(*args, **kwargs):
-        raise RuntimeError(
-            "PDF not uploaded ⚠️"
-        )
+        raise RuntimeError("PDF not uploaded ⚠️")
 
 
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
@@ -18,7 +17,6 @@ import streamlit as st
 import uuid
 import tempfile
 import os
-
 
 # Page COnfig
 st.set_page_config(
@@ -380,7 +378,7 @@ def resume_hitl_execution(decision):
         st.error(f"Could not resume the requested action: {error}")
 
 
-# SEssion State 
+# Session State
 if "message_history" not in st.session_state:
     st.session_state["message_history"] = []
 
@@ -399,7 +397,7 @@ if "thread_titles" not in st.session_state:
 add_thread(st.session_state["thread_id"])
 sync_pending_interrupt(st.session_state["thread_id"])
 
-# Header 
+# Header
 st.markdown(
     """
 <div class="nova-header">
@@ -415,7 +413,7 @@ st.markdown(
 )
 
 
-# Sidebar 
+# Sidebar
 with st.sidebar:
     st.markdown("### 💬 Nova Personalised ChatBot")
 
@@ -459,10 +457,10 @@ with st.sidebar:
             st.session_state["message_history"] = temp_messages
             sync_pending_interrupt(thread_id)
             st.rerun()
-            
+
     st.markdown("---")
     st.markdown(
-    f"""
+        f"""
             <div style="
             background:linear-gradient(135deg,#1e293b,#0f172a);
             padding:14px;
@@ -493,10 +491,10 @@ with st.sidebar:
             </p>
             </div>
             """,
-    unsafe_allow_html=True,
-)
-    
-# Main Chat Area 
+        unsafe_allow_html=True,
+    )
+
+# Main Chat Area
 if not st.session_state["message_history"]:
     st.markdown(
         """
@@ -507,7 +505,7 @@ if not st.session_state["message_history"]:
     </div>
     """,
         unsafe_allow_html=True,
-)
+    )
 
 for message in st.session_state["message_history"]:
     avatar = "🧑" if message["role"] == "user" else "🤖"
@@ -546,18 +544,11 @@ if current_thread_has_pending_hitl:
             resume_hitl_execution("no")
 
 
-
 # CHAT INPUT + PDF UPLOAD
-submission = st.chat_input(
-    "Message Nova…",
-    accept_file=True,
-    file_type=["pdf"],
-    disabled=current_thread_has_pending_hitl,
-)
-
+submission = st.chat_input("Type Here ✨", accept_file=True, file_type=["pdf"])
 user_input = None
-
 if submission:
+
     user_input = submission.text
     uploaded_files = submission.files
 
@@ -569,10 +560,12 @@ if submission:
             with tempfile.NamedTemporaryFile(
                 delete=False, suffix=".pdf"
             ) as temporary_file:
+
                 temporary_file.write(uploaded_pdf.getvalue())
                 temporary_file_path = temporary_file.name
 
-            with st.spinner(f"Processing {uploaded_pdf.name}…"):
+            with st.spinner(f"Processing {uploaded_pdf.name}..."):
+
                 ingest_rag_document(temporary_file_path)
 
             st.toast(f"{uploaded_pdf.name} processed successfully.", icon="✅")
