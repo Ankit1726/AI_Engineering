@@ -20,6 +20,7 @@ langchain-tavily
 # LLM Providers
 langchain-openai
 langchain-groq
+mcp-use
 langchain-google-genai
 langchain-anthropic
 langchainhub
