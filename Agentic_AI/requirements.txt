@@ -20,10 +20,13 @@ langchain-tavily
 # LLM Providers
 langchain-openai
 langchain-groq
-mcp-use
 langchain-google-genai
 langchain-anthropic
 langchainhub
+
+# MCP Servers
+fastmcp
+langchain-mcp-adapters
 
 # Vector Stores
 langchain-chroma
@@ -84,3 +87,4 @@ psycopg2-binary
 pinecone
 neo4j
 torchvision
+streamlit
