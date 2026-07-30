@@ -209,11 +209,3 @@ If you found this repository useful:
 - Follow for more AI/ML content
 
 ---
-
-<div align="center">
-
-#### 🚀 Learn • Build • Share • Grow
-
-**Free LLM API: https://github.com/alistaitsacle/free-llm-api-keys**
-
-</div>
