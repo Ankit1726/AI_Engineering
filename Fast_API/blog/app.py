@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends,HTTPException,status
+from fastapi import FastAPI, Depends,HTTPException,status,Query
 from src.database import get_db
 from src.schemas import BlogCreate,BlogResponse
 from sqlalchemy.orm import Session
@@ -26,9 +26,29 @@ def home():
 
 ## CRUD Operations
 # Read Blogs
-@app.get("/blogs", response_model=list[schemas.BlogResponse])
-def get_blogs(db: Session = Depends(get_db)):
-    return db.query(models.Blog).all()
+@app.get("/blogs", response_model=schemas.BlogPagination)
+def get_blogs(db: Session = Depends(get_db),page: int = 1,
+    limit: int = 4,
+    search: str = Query("", description="Search by blog title")):
+    query =  db.query(models.Blog)
+
+    if search:
+        query = query.filter(models.Blog.title.ilike(f"%{search}%"))
+
+    # Get total record count matching the filter
+    total = query.count()
+
+    # Calculate offset and execute paginated query
+    offset = (page - 1) * limit
+    blogs = query.offset(offset).limit(limit).all()
+    
+    # Return structured paginated response
+    return {
+        "page": page,
+        "limit": limit,
+        "total": total,
+        "data": blogs
+    }
 
 # Create Blog
 @app.post("/create-blogs")
