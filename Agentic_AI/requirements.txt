@@ -27,7 +27,8 @@ langgraph-checkpoint-postgres
 # ==========================
 langchain-groq
 langchain-google-genai
-langchain-anthropic
+langchain-mistralai
+
 
 # ==========================
 # MCP
@@ -57,6 +58,7 @@ langchain-tavily
 duckduckgo-search
 wikipedia
 arxiv
+ddgs
 
 # ==========================
 # Document Processing
