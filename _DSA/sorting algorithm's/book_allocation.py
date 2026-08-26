@@ -1,7 +1,7 @@
 ## Book Allocation Problem
 class Sorting:
 
-    @staticmethod
+    @staticmethod # C:O(log(range)*m)
     def isValid(arr: list[int], n: int, m: int, allowedPages: int) -> bool:
         student = 1
         pages = 0
