@@ -1,6 +1,4 @@
-# ==========================
 # Core
-# ==========================
 ipykernel
 jupyter
 notebook
@@ -10,9 +8,7 @@ requests
 httpx
 psycopg[binary,pool]
 
-# ==========================
 # LangChain v1 Ecosystem
-# ==========================
 langchain>=1.3.0
 langgraph>=1.2.5
 langchain-core>=1.1.0
@@ -22,37 +18,30 @@ langgraph-checkpoint
 langgraph-checkpoint-sqlite
 langgraph-checkpoint-postgres
 
-# ==========================
+
 # LLM Providers
-# ==========================
 langchain-groq
 langchain-google-genai
 langchain-mistralai
+litellm
+langchain-community
 
 
-# ==========================
 # MCP
-# ==========================
 fastmcp
 langchain-mcp-adapters
 
-# ==========================
 # Vector Databases
-# ==========================
 langchain-chroma
 chromadb
 faiss-cpu
 pinecone
 
-# ==========================
 # Embeddings
-# ==========================
 langchain-huggingface
 sentence-transformers
 
-# ==========================
 # Search Tools
-# ==========================
 tavily-python
 langchain-tavily
 duckduckgo-search
@@ -60,48 +49,34 @@ wikipedia
 arxiv
 ddgs
 
-# ==========================
 # Document Processing
-# ==========================
 beautifulsoup4
 unstructured
 pypdf
 python-docx
 pymupdf
 
-# ==========================
+
 # Validation
-# ==========================
 pydantic>=2.10
 typing-extensions
 
-# ==========================
 # APIs
-# ==========================
 fastapi
 uvicorn
 sqlalchemy
 
-# ==========================
+
 # Data Science
-# ==========================
 numpy
 pandas
 matplotlib
-
-# ==========================
-# Tokenizers
-# ==========================
 tiktoken
 
-# ==========================
 # Async
-# ==========================
 aiohttp
 nest-asyncio
 
-# ==========================
 # Visualization
-# ==========================
 graphviz
 grandalf
