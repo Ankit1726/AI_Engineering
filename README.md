@@ -1,12 +1,12 @@
-## 🚀 AI/ML Learning Vault
+#  ***AI Engineering Vault***
 
 <div align="center">
   
-- 🧠 Agnetic AI & GenAI Github Project Repository ✅
+***🧠 Agnetic AI & GenAI Github Project Repository ✅***
 
-- Your Complete Roadmap to  RAG, NLP , GenAI & Agentic AI
+***Your Complete Roadmap to  RAG, NLP , GenAI & Agentic AI.***
 
--  A curated collection of the most valuable open-source repositories for aspiring AI Developers.
+***A curated collection of the most valuable open-source repositories for aspiring AI Developers.***
 
 ![AI Developers](https://img.shields.io/badge/Artificial%20Intelligence-AI-blue)
 ![Agentic AI](https://img.shields.io/badge/Machine%20Learning-ML-green)
