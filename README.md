@@ -49,7 +49,7 @@
 
 ---
 
-## 🌟 Why This Collection?
+## ***🌟 Why This Collection***
 
 ✅ Free & Open Source  
 ✅ Beginner Friendly  
@@ -62,9 +62,9 @@
 
 ---
 
-### **👨‍💻 Author: Ankit Gupta**
+### ***👨‍💻 Author: Ankit Gupta***
 
-**AI Engineer | Generative AI & Agentic AI Developer**
+***AI Engineer | Generative AI & Agentic AI Developer***
 
 - 🚀 Building AI Applications  
 - 📚 Learning in Public  
@@ -72,7 +72,7 @@
 
 ---
 
-## ⭐ Support This Repository
+### ***⭐ Support This Repository***
 
 If you found this repository useful:
 
