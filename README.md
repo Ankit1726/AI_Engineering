@@ -16,8 +16,6 @@
 
 ---
 
-## 🦾 Large Language Models & Agentic AI
-
 ### [Hands-On Large Language Models](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models)
 
 - Practical LLM applications
