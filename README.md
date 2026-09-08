@@ -4,7 +4,7 @@
   
 ***🧠 Agnetic AI & GenAI Github Project Repository ✅***
 
-***Your Complete Roadmap to  RAG, NLP , GenAI & Agentic AI.***
+***Your Complete Roadmap to GenAI & Agentic AI.***
 
 ***A curated collection of the most valuable open-source repositories for aspiring AI Developers.***
 
