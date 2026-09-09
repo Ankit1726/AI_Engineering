@@ -2,6 +2,7 @@
 python-dotenv
 pydantic>=2.8
 typing-extensions
+python-multipart
 
 # LangChain
 langchain
@@ -15,7 +16,7 @@ langgraph-checkpoint
 langgraph-checkpoint-sqlite
 
 # LLM Providers
-langchain-openai
+langchain-mistralai
 langchain-google-genai
 langchain-groq
 
@@ -27,11 +28,6 @@ torch
 # Vector Databases
 faiss-cpu
 chromadb
-
-# Optional Vector DBs
-pinecone
-qdrant-client
-weaviate-client
 
 # Document Loaders
 pypdf
@@ -49,33 +45,3 @@ duckduckgo-search
 
 # Tokenization
 tiktoken
-
-# Database
-sqlalchemy
-
-# API
-fastapi
-uvicorn
-
-# UI
-streamlit
-
-# Data
-pandas
-numpy
-
-# Utility
-requests
-httpx
-aiohttp
-tenacity
-
-# Notebook
-ipykernel
-jupyter
-
-# Logging
-rich
-
-# Environment
-python-multipart
