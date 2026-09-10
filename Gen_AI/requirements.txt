@@ -1,4 +1,5 @@
 # Core
+ipykernel
 python-dotenv
 pydantic>=2.8
 typing-extensions
