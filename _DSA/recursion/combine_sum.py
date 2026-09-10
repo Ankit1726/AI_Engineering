@@ -1,8 +1,7 @@
 # Tar in maze problem
 
 class Backtracking: # TC:O(2^n)
-    def helper(self,arr: list[int],idx: int,target: int,combin: list[int],ans: list[list[int]],seen_set: set,
-    ):
+    def helper(self,arr: list[int],idx: int,target: int,combin: list[int],ans: list[list[int]],seen_set):
         # Target achieve ho gaya
         if target == 0:
             combin_tuple = tuple(combin)
