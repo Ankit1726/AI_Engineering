@@ -10,6 +10,8 @@ langchain
 langchain-core
 langchain-community
 langchain-text-splitters
+langchain-huggingface
+langchain-pinecone
 
 # LangGraph
 langgraph
@@ -18,7 +20,6 @@ langgraph-checkpoint-sqlite
 
 # LLM Providers
 langchain-mistralai
-langchain-google-genai
 langchain-groq
 
 # Embedding Models
@@ -29,6 +30,7 @@ torch
 # Vector Databases
 faiss-cpu
 chromadb
+pinecone
 
 # Document Loaders
 pypdf
@@ -46,3 +48,4 @@ duckduckgo-search
 
 # Tokenization
 tiktoken
+beautifulsoup4
