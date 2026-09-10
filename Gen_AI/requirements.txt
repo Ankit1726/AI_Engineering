@@ -41,7 +41,7 @@ wikipedia
 arxiv
 
 # Search Tools
-tavily-python
+langchain_tavily
 duckduckgo-search
 
 # Tokenization
