@@ -1,0 +1,17 @@
+## env creation
+1. env creation : conda create -p venv python==3.13 -y
+2. activation : conda activate venv/
+3. make requirements.txt file 
+4. run requirements.txt file using pip install -r requirements.txt 
+## Mysql Setup
+Directory: AIML
+mysql passoword: Password@
+Projects Gallery
+https://github.com/KalyanM45/AI-Project-Gallery
+
+
+-----------------------  AIML & Data Science Entry Preparation Target 2027  --------------------------
+# python
+# SQL
+# ML/DL/RAG
+# System Design
