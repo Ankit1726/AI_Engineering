@@ -1,7 +1,6 @@
 # 3 sum problem (2 pointer appraoch)
 
-
-class array:
+class array: # TC:O(n^2+n*logn) & SC:O(1)
     def sum_3(self, arr: list[int], tar: int) -> list[list[int]]:
         arr.sort()
         n = len(arr)
