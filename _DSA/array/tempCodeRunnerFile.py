@@ -1,0 +1,1 @@
+arr[i],arr[j],arr[p],arr[q]
