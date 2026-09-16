@@ -1,0 +1,67 @@
+Building Smarter AI Applications: A Guide to Retrieval-Augmented Generation (RAG) with Python
+
+1. Introduction
+Large Language Models (LLMs) are powerful, but they share common limitations: knowledge cutoffs and hallucinations. Training or fine-tuning models on private or rapidly changing data is often slow and expensive. 
+
+Retrieval-Augmented Generation (RAG) solves this by pairing an external information retrieval mechanism with a generative model. Instead of relying solely on internal parameters, the model searches a curated knowledge base, pulls relevant context, and uses it to synthesize accurate, verifiable responses.
+
+2. Why Python Powers Modern RAG
+Python is the industry standard for AI and machine learning workflows due to its robust ecosystem:
+- AI Orchestration: Frameworks like LangChain and LlamaIndex provide high-level abstractions to construct pipelines quickly.
+- Vector Search & Embeddings: Native client libraries for vector databases (e.g., ChromaDB, FAISS, Pinecone, Qdrant) integrate directly into Python workflows.
+- Rich Ecosystem: Python makes it simple to handle document ingestion, chunking, and API integration with models like OpenAI, Anthropic, or open-weight models via Hugging Face.
+
+3. The Core Architecture of a RAG Pipeline
+A standard RAG pipeline operates across two main phases:
+
+A. Ingestion & Indexing
+- Loading: Ingest unstructured documents (PDFs, Markdown, text files).
+- Chunking: Divide long texts into smaller, semantic passages to fit within model context windows.
+- Embedding: Convert text chunks into dense vector representations using an embedding model.
+- Storage: Store embeddings and text chunks in a vector database for efficient semantic search.
+
+B. Retrieval & Generation
+- Query Embedding: Convert the user's incoming query into an embedding vector.
+- Similarity Search: Query the vector database to retrieve the top-k most relevant chunks using distance metrics like cosine similarity.
+- Prompt Augmentation: Combine the original query with the retrieved chunks into an augmented prompt.
+- Generation: Pass the prompt to an LLM, instructing it to answer strictly based on the provided context.
+
+4. Minimal Python Implementation Example
+Below is a conceptual example using LangChain and an in-memory vector store:
+
+```python
+from langchain_community.document_loaders import TextLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_core.prompts import ChatPromptTemplate
+
+# 1. Load and chunk documents
+loader = TextLoader("knowledge_base.txt")
+docs = loader.load()
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+splits = text_splitter.split_documents(docs)
+
+# 2. Embed and store
+vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings())
+retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+
+# 3. Create prompt and retrieval chain
+system_prompt = (
+    "Use the following context to answer the question. "
+    "If you do not know, say you don't know.\n\n{context}"
+)
+prompt = ChatPromptTemplate.from_messages([
+    ("system", system_prompt),
+    ("human", "{input}"),
+])
+
+llm = ChatOpenAI(model="gpt-4o-mini")
+question_answer_chain = create_stuff_documents_chain(llm, prompt)
+rag_chain = create_retrieval_chain(retriever, question_answer_chain)
+
+# 4. Query
+response = rag_chain.invoke({"input": "What is Python's primary focus?"})
+print(response["answer"])
