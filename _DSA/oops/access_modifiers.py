@@ -13,6 +13,7 @@ class Person:
 obj = Person("Alexa",21)
 obj.greet_name()
 obj.show_age()
+print()
 
 class BankAcc:
     def __init__(self,bal,amount):
@@ -25,9 +26,9 @@ class BankAcc:
 
     def deposit_money(self,amount): # set by setter method
         self.__bal+=amount
-        return "deposited sucess✅"
+        print("deposited success✅")
 
 account = BankAcc(1430332,0)
 print(f"account balance:{account.get_bal()}$")
 account.deposit_money(33343532)
-print(f"account balance:{account.get_bal()}$")
+print(f"updated balance:{account.get_bal()}$")
