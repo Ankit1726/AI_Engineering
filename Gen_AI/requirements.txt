@@ -42,7 +42,8 @@ python-docx
 beautifulsoup4
 lxml
 wikipedia
-arxiv
+arxiv<2.0.0
+multiQueryRetriever
 
 # Search Tools
 langchain_tavily
