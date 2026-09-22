@@ -1,4 +1,4 @@
-### Inheritance: (Base Class --> Parent Class)
+### Inheritance(Method Overriding): (Base Class --> Parent Class)
 class Person:
     def __init__(self, name, age):  # parent class
         self.name = name
