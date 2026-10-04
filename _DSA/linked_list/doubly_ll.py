@@ -50,7 +50,39 @@ class Doubly_LL:
             curr = curr.prev
         print("null")
 
-    
+    # pop front: (delete from front)
+    def pop_front(self):
+        if not self.head:
+            print("list is already empty")
+            return
+
+        temp = self.head 
+        self.head = self.head.next 
+        if self.head:
+            self.head.prev = None # prev --> null
+        else:
+            self.tail = None 
+
+        temp.next = None 
+        del temp 
+
+    # pop back: (delete from back)
+    def pop_back(self):
+        if not self.tail:
+            print("list is empty")
+            return
+
+        temp = self.tail 
+        self.tail = self.tail.prev # step back 
+
+        if self.tail:
+            self.tail.next = None 
+        else:
+            self.head = None # having only 1 node 
+
+        temp.prev = None 
+        del temp
+
 dll = Doubly_LL()
 dll.push_front(10)
 dll.push_front(20)
@@ -58,4 +90,9 @@ dll.push_front(30)
 dll.push_back(40)
 dll.push_back(50)
 dll.print_forward()
+dll.print_backward()
+
+dll.pop_front()
+dll.print_forward()
+dll.pop_back()
 dll.print_backward()
