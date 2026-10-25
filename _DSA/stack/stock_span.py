@@ -1,6 +1,6 @@
 ## -------------- Stock Span Problem --------------- 
 class Stack:
-    def stock_span(self,prices): # O(n) & O(n)
+    def stock_span(self,prices): # TC:O(n) & SC:O(n)
         n = len(prices)
         stack = []
         span = [0]*n
